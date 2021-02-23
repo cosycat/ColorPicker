@@ -62,13 +62,18 @@ public class ColorPickerModel {
         });
     }
     
-    
-    
     public void addUI(MainUI mainUI) {
         this.mainUI = mainUI;
     }
     
     
+    public void darkenColor() {
+        color.set(color.get().darker());
+    }
+    
+    public void brightenColor() {
+        color.set(color.get().brighter());
+    }
     
     /////////////////////////
     // Getters and Setters //
@@ -134,4 +139,6 @@ public class ColorPickerModel {
     public void setApplicationTitle(String applicationTitle) {
         this.applicationTitle.set(applicationTitle);
     }
+    
+    
 }
