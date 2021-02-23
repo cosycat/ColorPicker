@@ -12,7 +12,7 @@ public class MainUI extends GridPane implements ViewInit {
     private NamedColorsSelection colorPicker;
     private DarkerBrighterButtons darkerBrighterButtons;
     
-    private ColorPickerModel model;
+    private final ColorPickerModel model;
     
     public MainUI(ColorPickerModel model) {
         this.model = model;

@@ -26,8 +26,8 @@ public class NamedColorsSelection extends VBox implements ViewInit {
     
     @Override
     public void initializeControls() {
-        for (var colorNameP : model.getSpecialColors()) {
-            NamedColorButton namedColorButton = new NamedColorButton(model, colorNameP, buttonGroup);
+        for (var colorNamePair : model.getSpecialColors()) {
+            NamedColorButton namedColorButton = new NamedColorButton(model, colorNamePair, buttonGroup);
             buttonList.add(namedColorButton);
             this.getChildren().add(namedColorButton);
         }
