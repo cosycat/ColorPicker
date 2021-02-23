@@ -29,7 +29,7 @@ public class MainUI extends GridPane implements ViewInit {
     public void initializeControls() {
         rgbSliders = new RGBSliders(model);
         rgbValues = new RGBValueTFs(model, 10, true);
-        hexValues = new RGBValueTFs(model, 16, false);
+        hexValues = new RGBValueTFs(model, 16, true);
         colorDisplay = new ColorDisplay(model, this);
         colorPicker = new NamedColorsSelection(model);
         darkerBrighterButtons = new DarkerBrighterButtons(model);
