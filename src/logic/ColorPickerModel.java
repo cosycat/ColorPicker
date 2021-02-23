@@ -16,21 +16,23 @@ public class ColorPickerModel {
     
     private final ObjectProperty<Color> color = new SimpleObjectProperty<>();
     
-    private final Map<String, Color> specialColors = new HashMap<>();
+    private final List<ColorNamePair> specialColors = new ArrayList<>();
     
     private final StringProperty applicationTitle = new SimpleStringProperty("Color Picker");
     
     private MainUI mainUI;
     
     public ColorPickerModel() {
-        specialColors.put("Black", Color.BLACK);
-        specialColors.put("Brown", Color.BROWN);
-        specialColors.put("Red", Color.RED);
-        specialColors.put("Orange", Color.ORANGE);
-        specialColors.put("Yellow", Color.YELLOW);
-        specialColors.put("Green", Color.GREEN);
-        specialColors.put("Blue", Color.BLUE);
-        specialColors.put("Purple", Color.PURPLE);
+        specialColors.addAll(Arrays.asList(
+                new ColorNamePair("Black", Color.BLACK),
+                new ColorNamePair("Brown", Color.BROWN),
+                new ColorNamePair("Red", Color.RED),
+                new ColorNamePair("Orange", Color.ORANGE),
+                new ColorNamePair("Yellow", Color.YELLOW),
+                new ColorNamePair("Green", Color.GREEN),
+                new ColorNamePair("Blue", Color.BLUE),
+                new ColorNamePair("Purple", Color.PURPLE))
+        );
         
         
         setupListeners();
@@ -140,5 +142,7 @@ public class ColorPickerModel {
         this.applicationTitle.set(applicationTitle);
     }
     
-    
+    public List<ColorNamePair> getSpecialColors() {
+        return specialColors;
+    }
 }
