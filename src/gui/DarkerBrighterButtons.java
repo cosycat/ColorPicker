@@ -2,6 +2,7 @@ package gui;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import logic.ColorPickerModel;
 
 public class DarkerBrighterButtons extends VBox implements ViewInit {
@@ -14,6 +15,7 @@ public class DarkerBrighterButtons extends VBox implements ViewInit {
     public DarkerBrighterButtons(ColorPickerModel model) {
         this.model = model;
         init();
+        updateButtonsDisabled(model.getColor());
     }
     
     @Override
@@ -41,13 +43,17 @@ public class DarkerBrighterButtons extends VBox implements ViewInit {
     @Override
     public void setupValueChangedListeners() {
         model.colorProperty().addListener((observable, oldValue, newValue) -> {
-            brighterButton.setDisable(newValue.getBrightness() >= 1);
-            darkerButton.setDisable(newValue.getBrightness() <= 0);
+            updateButtonsDisabled(newValue);
         });
     }
     
     @Override
     public void setupBindings() {
     
+    }
+    
+    private void updateButtonsDisabled(Color newValue) {
+        brighterButton.setDisable(newValue.getBrightness() >= 1);
+        darkerButton.setDisable(newValue.getBrightness() <= 0);
     }
 }
