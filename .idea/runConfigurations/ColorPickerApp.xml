@@ -1,0 +1,19 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ColorPickerApp" type="Application" factoryName="Application" nameIsGenerated="true">
+    <envs>
+      <env name="--module-path" value="${PATH_TO_FX} --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="gui.ColorPickerApp" />
+    <module name="ColorPicker" />
+    <option name="PROGRAM_PARAMETERS" value="--module-path /Library/Java/Libraries/javafx-sdk-14.0.1/lib --add-modules javafx.controls,javafx.fxml" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="gui.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

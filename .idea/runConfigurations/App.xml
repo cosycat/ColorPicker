@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="App" type="Application" factoryName="Application">
+    <envs>
+      <env name="--module-path ${PATH_TO_FX} --add-modules" value="javafx.controls,javafx.fxml" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="gui.ColorPickerApp" />
+    <module name="ColorPicker" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
