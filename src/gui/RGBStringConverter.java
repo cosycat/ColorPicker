@@ -12,7 +12,7 @@ public class RGBStringConverter extends NumberStringConverter {
     
     @Override
     public String toString(Number number) {
-        return Integer.toString((int)(number.doubleValue() * 255), numberSystem);
+        return Integer.toString((int)(number.doubleValue() * 255), numberSystem).toUpperCase();
     }
     
     @Override
