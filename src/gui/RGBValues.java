@@ -44,14 +44,31 @@ public class RGBValues extends VBox implements ViewInit {
     
     @Override
     public void setupValueChangedListeners() {
-    
+        rField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (Integer.parseInt(newValue) > 255)
+                rField.textProperty().setValue("255");
+            if (Integer.parseInt(newValue) < 0)
+                rField.textProperty().setValue("0");
+        });
+        gField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (Integer.parseInt(newValue) > 255)
+                gField.textProperty().setValue("255");
+            if (Integer.parseInt(newValue) < 0)
+                gField.textProperty().setValue("0");
+        });
+        bField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (Integer.parseInt(newValue) > 255)
+                bField.textProperty().setValue("255");
+            if (Integer.parseInt(newValue) < 0)
+                bField.textProperty().setValue("0");
+        });
     }
     
     @Override
     public void setupBindings() {
-        
-        rField.textProperty().bindBidirectional(model.rProperty(), new NumberStringConverter());
-        gField.textProperty().bindBidirectional(model.gProperty(), new NumberStringConverter());
-        bField.textProperty().bindBidirectional(model.bProperty(), new NumberStringConverter());
+        rField.textProperty().bindBidirectional(model.rProperty(), new RGBStringConverter());
+        gField.textProperty().bindBidirectional(model.gProperty(), new RGBStringConverter());
+        bField.textProperty().bindBidirectional(model.bProperty(), new RGBStringConverter());
     }
 }
+
