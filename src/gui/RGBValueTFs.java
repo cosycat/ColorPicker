@@ -2,21 +2,23 @@ package gui;
 
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.util.StringConverter;
-import javafx.util.converter.NumberStringConverter;
 import logic.ColorPickerModel;
 
-public class RGBValues extends VBox implements ViewInit {
+public class RGBValueTFs extends VBox implements ViewInit {
     
     private TextField rField;
     private TextField gField;
     private TextField bField;
     
-    private ColorPickerModel model;
+    private final ColorPickerModel model;
+    private final int numberSystem;
+    private final boolean editable;
     
     
-    public RGBValues(ColorPickerModel model) {
+    public RGBValueTFs(ColorPickerModel model, int numberSystem, boolean editable) {
         this.model = model;
+        this.numberSystem = numberSystem;
+        this.editable = editable;
         init();
     }
     
@@ -30,6 +32,10 @@ public class RGBValues extends VBox implements ViewInit {
         rField = new TextField();
         gField = new TextField();
         bField = new TextField();
+    
+        rField.setEditable(editable);
+        gField.setEditable(editable);
+        bField.setEditable(editable);
     }
     
     @Override
@@ -66,9 +72,9 @@ public class RGBValues extends VBox implements ViewInit {
     
     @Override
     public void setupBindings() {
-        rField.textProperty().bindBidirectional(model.rProperty(), new RGBStringConverter());
-        gField.textProperty().bindBidirectional(model.gProperty(), new RGBStringConverter());
-        bField.textProperty().bindBidirectional(model.bProperty(), new RGBStringConverter());
+        rField.textProperty().bindBidirectional(model.rProperty(), new RGBStringConverter(numberSystem));
+        gField.textProperty().bindBidirectional(model.gProperty(), new RGBStringConverter(numberSystem));
+        bField.textProperty().bindBidirectional(model.bProperty(), new RGBStringConverter(numberSystem));
     }
 }
 

@@ -1,14 +1,13 @@
 package gui;
 
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import logic.ColorPickerModel;
 
 public class MainUI extends GridPane implements ViewInit {
     
     private RGBSliders rgbSliders;
-    private RGBValues rgbValues;
-    private HexValues hexValues;
+    private RGBValueTFs rgbValues;
+    private RGBValueTFs hexValues;
     private ColorDisplay colorDisplay;
     private NamedColorsSelection colorPicker;
     private DarkerBrighterButtons darkerBrighterButtons;
@@ -29,8 +28,8 @@ public class MainUI extends GridPane implements ViewInit {
     @Override
     public void initializeControls() {
         rgbSliders = new RGBSliders(model);
-        rgbValues = new RGBValues(model);
-        hexValues = new HexValues(model);
+        rgbValues = new RGBValueTFs(model, 10, true);
+        hexValues = new RGBValueTFs(model, 16, false);
         colorDisplay = new ColorDisplay(model, this);
         colorPicker = new NamedColorsSelection(model);
         darkerBrighterButtons = new DarkerBrighterButtons(model);
