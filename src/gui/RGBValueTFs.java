@@ -4,11 +4,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import logic.ColorPickerModel;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 public class RGBValueTFs extends VBox implements ViewInit {
     
     private TextField rField;
     private TextField gField;
     private TextField bField;
+    
+    private final List<TextField> allTextFields = new LinkedList<>();
     
     private final ColorPickerModel model;
     private final int numberSystem;
@@ -33,9 +39,10 @@ public class RGBValueTFs extends VBox implements ViewInit {
         gField = new TextField();
         bField = new TextField();
     
-        rField.setEditable(editable);
-        gField.setEditable(editable);
-        bField.setEditable(editable);
+        allTextFields.addAll(Arrays.asList(rField, gField, bField));
+        
+        allTextFields.forEach(textField -> textField.setEditable(editable));
+        
     }
     
     @Override
@@ -50,24 +57,26 @@ public class RGBValueTFs extends VBox implements ViewInit {
     
     @Override
     public void setupValueChangedListeners() {
-        rField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (Integer.parseInt(newValue) > 255)
-                rField.textProperty().setValue("255");
-            if (Integer.parseInt(newValue) < 0)
-                rField.textProperty().setValue("0");
-        });
-        gField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (Integer.parseInt(newValue) > 255)
-                gField.textProperty().setValue("255");
-            if (Integer.parseInt(newValue) < 0)
-                gField.textProperty().setValue("0");
-        });
-        bField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (Integer.parseInt(newValue) > 255)
-                bField.textProperty().setValue("255");
-            if (Integer.parseInt(newValue) < 0)
-                bField.textProperty().setValue("0");
-        });
+        if (editable) {
+            allTextFields.forEach(textField -> {
+                textField.textProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue.isEmpty()) {
+                        return; // it's ok if the user wants to just empty the text field. don't write anything else in there.
+                    }
+                    try {
+                        if (Integer.parseInt(newValue, numberSystem) > 255)
+                            textField.textProperty().setValue(Integer.toString(255, numberSystem));
+                        if (Integer.parseInt(newValue, numberSystem) < 0)
+                            textField.textProperty().setValue("0");
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                        System.out.println("Value is " + newValue);
+                        textField.textProperty().setValue("0");
+                        // TODO: maybe inform user somehow, play a sound or sth.
+                    }
+                });
+            });
+        }
     }
     
     @Override

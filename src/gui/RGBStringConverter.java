@@ -17,6 +17,9 @@ public class RGBStringConverter extends NumberStringConverter {
     
     @Override
     public Number fromString(String string) {
+        if (string.isEmpty()) {
+            return 0; // if the user wants to delete the content to write sth new in there, treat empty as 0.
+        }
         double value = Integer.parseInt(string, numberSystem) / 255.0;
         return value > 1 ? 1 : (value < 0 ? 0 : value);
     }
