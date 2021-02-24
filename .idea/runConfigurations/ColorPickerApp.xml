@@ -8,7 +8,7 @@
     <option name="PROGRAM_PARAMETERS" value="--module-path /Library/Java/Libraries/javafx-sdk-14.0.1/lib --add-modules javafx.controls,javafx.fxml" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="gui.*" />
+        <option name="PATTERN" value="gui.elements.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

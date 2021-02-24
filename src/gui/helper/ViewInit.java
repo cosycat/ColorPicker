@@ -1,4 +1,4 @@
-package gui;
+package gui.helper;
 
 /**
  * Help for keeping the same code style on every custom UI Class.

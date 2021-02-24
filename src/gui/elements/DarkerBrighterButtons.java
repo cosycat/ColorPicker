@@ -1,5 +1,6 @@
-package gui;
+package gui.elements;
 
+import gui.helper.ViewInit;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;

@@ -1,4 +1,4 @@
-package gui;
+package gui.helper;
 
 import javafx.util.converter.NumberStringConverter;
 

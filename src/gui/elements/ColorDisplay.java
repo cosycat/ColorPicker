@@ -1,5 +1,7 @@
-package gui;
+package gui.elements;
 
+import gui.MainUI;
+import gui.helper.ViewInit;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import logic.ColorPickerModel;

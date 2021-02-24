@@ -1,10 +1,9 @@
-package gui;
+package gui.elements;
 
-import javafx.scene.control.Label;
+import gui.helper.ViewInit;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import logic.ColorNamePair;
 import logic.ColorPickerModel;
 

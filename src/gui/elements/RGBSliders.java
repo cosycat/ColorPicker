@@ -1,5 +1,6 @@
-package gui;
+package gui.elements;
 
+import gui.helper.ViewInit;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 import logic.ColorPickerModel;

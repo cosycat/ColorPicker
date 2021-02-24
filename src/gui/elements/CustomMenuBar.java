@@ -1,5 +1,7 @@
-package gui;
+package gui.elements;
 
+import gui.ColorPickerApp;
+import gui.helper.ViewInit;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;

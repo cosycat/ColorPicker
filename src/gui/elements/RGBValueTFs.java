@@ -1,5 +1,7 @@
-package gui;
+package gui.elements;
 
+import gui.helper.RGBStringConverter;
+import gui.helper.ViewInit;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import logic.ColorPickerModel;

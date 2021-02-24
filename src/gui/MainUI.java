@@ -1,5 +1,7 @@
 package gui;
 
+import gui.elements.*;
+import gui.helper.ViewInit;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import logic.ColorPickerModel;
