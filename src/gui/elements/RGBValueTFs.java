@@ -19,13 +19,13 @@ public class RGBValueTFs extends VBox implements ViewInit {
     private final List<TextField> allTextFields = new LinkedList<>();
     
     private final ColorPickerModel model;
-    private final int numberSystem;
+    private final int numberSystemBase;
     private final boolean editable;
     
     
-    public RGBValueTFs(ColorPickerModel model, int numberSystem, boolean editable) {
+    public RGBValueTFs(ColorPickerModel model, int numberSystemBase, boolean editable) {
         this.model = model;
-        this.numberSystem = numberSystem;
+        this.numberSystemBase = numberSystemBase;
         this.editable = editable;
         init();
     }
@@ -66,13 +66,12 @@ public class RGBValueTFs extends VBox implements ViewInit {
                         return; // it's ok if the user wants to just empty the text field. don't write anything else in there.
                     }
                     try {
-                        if (Integer.parseInt(newValue, numberSystem) > 255)
-                            textField.textProperty().setValue(Integer.toString(255, numberSystem));
-                        if (Integer.parseInt(newValue, numberSystem) < 0)
+                        if (Integer.parseInt(newValue, numberSystemBase) > 255)
+                            textField.textProperty().setValue(Integer.toString(255, numberSystemBase));
+                        if (Integer.parseInt(newValue, numberSystemBase) < 0)
                             textField.textProperty().setValue("0");
                     } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                        System.out.println("Value is " + newValue);
+                        System.out.println("Entered the invalid value " + newValue + " but the number system has base " + numberSystemBase);
                         textField.textProperty().setValue("0");
                         // TODO: maybe inform user somehow, play a sound or sth.
                     }
@@ -83,9 +82,9 @@ public class RGBValueTFs extends VBox implements ViewInit {
     
     @Override
     public void setupBindings() {
-        rField.textProperty().bindBidirectional(model.rProperty(), new RGBStringConverter(numberSystem));
-        gField.textProperty().bindBidirectional(model.gProperty(), new RGBStringConverter(numberSystem));
-        bField.textProperty().bindBidirectional(model.bProperty(), new RGBStringConverter(numberSystem));
+        rField.textProperty().bindBidirectional(model.rProperty(), new RGBStringConverter(numberSystemBase));
+        gField.textProperty().bindBidirectional(model.gProperty(), new RGBStringConverter(numberSystemBase));
+        bField.textProperty().bindBidirectional(model.bProperty(), new RGBStringConverter(numberSystemBase));
     }
 }
 

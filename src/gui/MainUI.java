@@ -15,6 +15,7 @@ public class MainUI extends BorderPane implements ViewInit {
     private RGBSliders rgbSliders;
     private RGBValueTFs rgbValues;
     private RGBValueTFs hexValues;
+    private RGBValueTFs binaryValues;
     
     private ColorDisplay colorDisplay;
     private NamedColorsSelection colorPicker;
@@ -44,6 +45,8 @@ public class MainUI extends BorderPane implements ViewInit {
         rgbSliders = new RGBSliders(model);
         rgbValues = new RGBValueTFs(model, 10, true);
         hexValues = new RGBValueTFs(model, 16, true);
+        binaryValues = new RGBValueTFs(model, 2, true);
+        
         
         colorDisplay = new ColorDisplay(model, this);
         colorPicker = new NamedColorsSelection(model);
@@ -55,7 +58,7 @@ public class MainUI extends BorderPane implements ViewInit {
     public void layoutControls() {
         this.setTop(menuBar);
         
-        centerGridPane.addRow(1, rgbSliders, rgbValues, hexValues);
+        centerGridPane.addRow(1, rgbSliders, rgbValues, hexValues, binaryValues);
         centerGridPane.addRow(2, colorDisplay, colorPicker, darkerBrighterButtons);
         
         this.setCenter(centerGridPane);
