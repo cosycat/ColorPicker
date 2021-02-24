@@ -21,6 +21,7 @@ public class CustomMenuBar extends MenuBar implements ViewInit {
     
     private MenuItem quitItem;
     
+    private Menu rainbowColorSelection;
     private List<MenuItem> colorSelectionsList = new ArrayList<>();
     
     public CustomMenuBar(ColorPickerModel model, ColorPickerApp app) {
@@ -43,10 +44,12 @@ public class CustomMenuBar extends MenuBar implements ViewInit {
         
         colorSelect = new Menu("Select Color");
         
+        rainbowColorSelection = new Menu("Rainbow Flag");
+        
         model.getSpecialColors().forEach(colorNamePair -> {
             MenuItem item = new MenuItem(colorNamePair.getName(), new Rectangle(10,10,colorNamePair.getColor()));
             item.setOnAction((event) -> model.setColor(colorNamePair.getColor()));
-            colorSelect.getItems().add(item);
+            rainbowColorSelection.getItems().add(item);
             colorSelectionsList.add(item);
         });
     }
@@ -55,6 +58,7 @@ public class CustomMenuBar extends MenuBar implements ViewInit {
     public void layoutControls() {
         fileMenu.getItems().add(quitItem);
         this.getMenus().add(fileMenu);
+        colorSelect.getItems().add(rainbowColorSelection);
         this.getMenus().add(colorSelect);
     }
     
