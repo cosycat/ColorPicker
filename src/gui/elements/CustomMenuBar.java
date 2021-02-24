@@ -10,7 +10,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.shape.Rectangle;
 import logic.ColorPickerModel;
-import logic.SaveLoadSystem;
 
 public class CustomMenuBar extends MenuBar implements ViewInit {
     
@@ -30,10 +29,7 @@ public class CustomMenuBar extends MenuBar implements ViewInit {
     
     @Override
     public void initializeSelf() {
-        SaveLoadSystem.loadAllColors().forEach(colorNamePair -> {
-            MenuItem menuItem = new MenuItem(colorNamePair.getName(), new Rectangle(10, 10, colorNamePair.getColor()));
-            menuItem.setOnAction((event) -> model.setColor(colorNamePair.getColor()));
-        });
+        
     }
     
     @Override
