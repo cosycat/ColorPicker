@@ -1,6 +1,7 @@
 package gui.elements;
 
 import gui.ColorPickerApp;
+import gui.helper.ColorCollection;
 import gui.helper.ViewInit;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -9,22 +10,17 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.shape.Rectangle;
 import logic.ColorPickerModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import logic.SaveLoadSystem;
 
 public class CustomMenuBar extends MenuBar implements ViewInit {
     
-    private ColorPickerModel model;
-    private ColorPickerApp app;
+    private final ColorPickerModel model;
+    private final ColorPickerApp app;
     
     private Menu fileMenu;
-    private Menu colorSelect;
-    
     private MenuItem quitItem;
     
-    private Menu rainbowColorSelection;
-    private List<MenuItem> colorSelectionsList = new ArrayList<>();
+    private Menu flagCollectionMenu;
     
     public CustomMenuBar(ColorPickerModel model, ColorPickerApp app) {
         this.model = model;
@@ -34,7 +30,10 @@ public class CustomMenuBar extends MenuBar implements ViewInit {
     
     @Override
     public void initializeSelf() {
-    
+        SaveLoadSystem.loadAllColors().forEach(colorNamePair -> {
+            MenuItem menuItem = new MenuItem(colorNamePair.getName(), new Rectangle(10, 10, colorNamePair.getColor()));
+            menuItem.setOnAction((event) -> model.setColor(colorNamePair.getColor()));
+        });
     }
     
     @Override
@@ -44,15 +43,16 @@ public class CustomMenuBar extends MenuBar implements ViewInit {
         quitItem = new MenuItem("Quit");
         quitItem.setAccelerator(new KeyCodeCombination(KeyCode.Q));
         
-        colorSelect = new Menu("Select Color");
+        flagCollectionMenu = new Menu("Flags");
         
-        rainbowColorSelection = new Menu("Rainbow Flag");
-        
-        model.getSpecialColors().forEach(colorNamePair -> {
-            MenuItem item = new MenuItem(colorNamePair.getName(), new Rectangle(10,10,colorNamePair.getColor()));
-            item.setOnAction((event) -> model.setColor(colorNamePair.getColor()));
-            rainbowColorSelection.getItems().add(item);
-            colorSelectionsList.add(item);
+        ColorCollection.getColorCollectionList().forEach(colorCollection -> {
+            Menu flagMenu = new Menu(colorCollection.getName());
+            colorCollection.getColors().forEach(colorNamePair -> {
+                MenuItem colorMenuItem = new MenuItem(colorNamePair.getName(), new Rectangle(10,10,colorNamePair.getColor()));
+                colorMenuItem.setOnAction((event) -> model.setColor(colorNamePair.getColor()));
+                flagMenu.getItems().add(colorMenuItem);
+            });
+            flagCollectionMenu.getItems().add(flagMenu);
         });
     }
     
@@ -60,8 +60,8 @@ public class CustomMenuBar extends MenuBar implements ViewInit {
     public void layoutControls() {
         fileMenu.getItems().add(quitItem);
         this.getMenus().add(fileMenu);
-        colorSelect.getItems().add(rainbowColorSelection);
-        this.getMenus().add(colorSelect);
+
+        this.getMenus().add(flagCollectionMenu);
     }
     
     @Override
