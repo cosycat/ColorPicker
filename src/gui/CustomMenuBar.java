@@ -1,12 +1,15 @@
 package gui;
 
-import javafx.application.Platform;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.shape.Rectangle;
 import logic.ColorPickerModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomMenuBar extends MenuBar implements ViewInit {
     
@@ -17,6 +20,8 @@ public class CustomMenuBar extends MenuBar implements ViewInit {
     private Menu colorSelect;
     
     private MenuItem quitItem;
+    
+    private List<MenuItem> colorSelectionsList = new ArrayList<>();
     
     public CustomMenuBar(ColorPickerModel model, ColorPickerApp app) {
         this.model = model;
@@ -32,10 +37,18 @@ public class CustomMenuBar extends MenuBar implements ViewInit {
     @Override
     public void initializeControls() {
         fileMenu = new Menu("File");
-        colorSelect = new Menu("Select Color");
         
         quitItem = new MenuItem("Quit");
         quitItem.setAccelerator(new KeyCodeCombination(KeyCode.Q));
+        
+        colorSelect = new Menu("Select Color");
+        
+        model.getSpecialColors().forEach(colorNamePair -> {
+            MenuItem item = new MenuItem(colorNamePair.getName(), new Rectangle(10,10,colorNamePair.getColor()));
+            item.setOnAction((event) -> model.setColor(colorNamePair.getColor()));
+            colorSelect.getItems().add(item);
+            colorSelectionsList.add(item);
+        });
     }
     
     @Override
